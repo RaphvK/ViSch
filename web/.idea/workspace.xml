@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e19513fa-14df-4a69-84bd-fdc9d10d21f1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/templates/visch/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/web.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/web.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/visch/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/visch/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/visch/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/visch/register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/visch/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/visch/login.html" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/venv/" />
     <ignored path="$PROJECT_DIR$/venv2/" />
@@ -34,23 +29,26 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/visch/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3523">
-              <caret line="186" lean-forward="true" selection-start-line="186" selection-end-line="186" />
-              <folding>
-                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#header#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#header#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#2;n#div#0;n#div#0;n#header#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="e#6404#6410#0#HTML" expanded="true" />
-              </folding>
+            <state relative-caret-position="403">
+              <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/visch/base.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="363">
+              <caret line="44" selection-start-line="44" selection-end-line="44" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/templates/visch/base.html">
+        <entry file="file://$PROJECT_DIR$/templates/visch/login.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="363">
-              <caret line="44" selection-start-line="44" selection-end-line="44" />
+            <state relative-caret-position="220">
+              <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
             </state>
           </provider>
         </entry>
@@ -94,6 +92,7 @@
         <option value="$PROJECT_DIR$/templates/visch/index.html" />
         <option value="$PROJECT_DIR$/templates/visch/register.html" />
         <option value="$PROJECT_DIR$/templates/visch/base.html" />
+        <option value="$PROJECT_DIR$/templates/visch/login.html" />
       </list>
     </option>
   </component>
@@ -217,7 +216,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9145000" />
+    <option name="totallyTimeSpent" value="9428000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-8" width="1936" height="1056" extended-state="6" />
@@ -308,14 +307,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/visch/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3523">
-          <caret line="186" lean-forward="true" selection-start-line="186" selection-end-line="186" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#header#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#header#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#div#0;n#div#0;n#header#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="e#6404#6410#0#HTML" expanded="true" />
-          </folding>
+        <state relative-caret-position="403">
+          <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
         </state>
       </provider>
     </entry>
@@ -330,6 +323,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="363">
           <caret line="44" selection-start-line="44" selection-end-line="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/visch/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
         </state>
       </provider>
     </entry>
