@@ -21,6 +21,7 @@
 
 <body>
 
+
   <!-- Navigation -->
   <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
@@ -31,10 +32,10 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="about.html">About</a>
+            <a class="nav-link" href="{% url 'visch:login' %}">Login</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="services.html">Services</a>
+            <a class="nav-link" href="{% url 'visch:register' %}">Account anlegen</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="contact.html">Contact</a>
