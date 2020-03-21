@@ -20,8 +20,7 @@ class Inhaber(models.Model):
     mail = models.EmailField(blank=True)
 
 class Shop(models.Model):
-    shopType = models.TextChoices('Restaurant', 'Bekleidungsgeschäft', 'Gärtnerei', 'Uhrenmacher', 'Juwelier', 'Buchladen'
-                                  'Handwerk', 'Parfümerie', 'Optiker', 'Entertainment')
+    shopType = models.TextChoices('shopType', 'Restaurant Bekleidungsgeschäft Gärtnerei Uhrenmacher Juwelier Buchladen Handwerk Parfümerie Optiker Entertainment')
     name = models.CharField(max_length=40)
     adresse = models.ForeignKey(Adresse, on_delete=models.CASCADE)
     categorie = models.CharField(max_length=70, choices=shopType.choices)
@@ -41,12 +40,12 @@ def get_image_path(instance, filename):
     return os.path.join('photos', str(instance.id), filename)
 
 class Ware(models.Model):
-    laden = models.ForeignKey(Laden, on_delete=models.DO_NOTHING)
+    laden = models.ForeignKey(Shop, on_delete=models.DO_NOTHING)
     photo = models.ImageField(upload_to=get_image_path, blank=True, null=True)
 
     titel = models.CharField(max_length=30)
     info = models.CharField(max_length=200)
-    preis = models.DecimalField()
+    preis = models.DecimalField(max_digits=4, decimal_places=2)
 
 
 
