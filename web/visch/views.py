@@ -37,4 +37,7 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    return redirect(reverse('web:index'))
+    return redirect(reverse('visch:index'))
+
+def betreiber_view(request):
+    return render(request, 'visch/betreiber.html')
