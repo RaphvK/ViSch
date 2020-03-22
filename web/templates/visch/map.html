@@ -9,12 +9,12 @@
 
 {% block content %}
 <div style="padding-top: 50px">
-    <h1>Läden in deiner Nachbarschaft ({{ map_center }})</h1>
+    <h1>Läden in deiner Nachbarschaft ({{ address_string }})</h1>
     <div id='map' width="100%" style="height: 500px"></div>
     <script>
     L.mapbox.accessToken = '{{ mapbox_access_token }}';
     var map = L.mapbox.map('map')
-        .setView([40, -74.50], 9)
+        .setView([{{ lat }}, {{ lon }}], 16)
         .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
     </script>
 </div>
