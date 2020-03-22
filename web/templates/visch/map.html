@@ -5,6 +5,16 @@
 <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 <script src='https://api.mapbox.com/mapbox.js/v3.3.0/mapbox.js'></script>
 <link href='https://api.mapbox.com/mapbox.js/v3.3.0/mapbox.css' rel='stylesheet' />
+<style>
+    .marker {
+      background-image: url({% static "mapbox-icon.png" %});
+      background-size: cover;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+</style>
 {% endblock %}
 
 {% block content %}
@@ -13,10 +23,26 @@
     <h3>{{ address_string }}</h3>
     <div id='map' width="100%" style="height: 500px"></div>
     <script>
+
     L.mapbox.accessToken = '{{ mapbox_access_token }}';
     var map = L.mapbox.map('map')
-        .setView([{{ lat }}, {{ lon }}], 16)
-        .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
+       .setView([{{ lat }}, {{ lon }}], 16)
+       .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
+
+    {#Markers#}
+    var geojson = [
+      {
+        type: 'Feature',
+        geometry: {
+          type: 'Point',
+          coordinates: [{{ lon }}, {{ lat }}]
+        }
+      }
+    ];
+
+    var myLayer = L.mapbox.featureLayer().setGeoJSON(geojson).addTo(map);
+    map.scrollWheelZoom.disable();
+
     </script>
 </div>
 <div style="padding-top: 30px; padding-bottom: 30px">
