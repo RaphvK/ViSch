@@ -98,7 +98,7 @@ class Article(models.Model):
             return 'Bild nicht gefunden.'
         return 'Bild gelöscht.'
 
-    
+
 # class Chat(models.Model):
 # name1
 # name2
