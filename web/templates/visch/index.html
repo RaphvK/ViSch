@@ -28,7 +28,7 @@
 
           </div>
           <div class="card-footer">
-            <p class="card-text">Gibt deine Adresse ein:</p>
+            <p class="card-text">Gib deine Adresse ein:</p>
             <form method="post" action="{% url 'visch:map' %}">
               {% csrf_token %}
               {{ address_form.as_p }}
