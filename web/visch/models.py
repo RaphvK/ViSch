@@ -6,19 +6,12 @@ import os
 def get_image_path(instance, filename):
    return os.path.join('photos', str(instance.id), filename)
 
-
-class Ort(models.Model):
-    name = models.CharField(max_length=50)
-    plz = models.PositiveIntegerField()
-
-    def __str__(self):
-        return self.name
-
-
 class Adresse(models.Model):
-    strasse = models.CharField(max_length=40)
-    latitude = models.FloatField()
-    longitude = models.FloatField()
+    street = models.CharField(max_length=40)
+    town = models.CharField(max_length=40)
+    zipCode = models.PositiveIntegerField()
+    latitude = models.FloatField(blank=True)
+    longitude = models.FloatField(blank=True)
 
 
 class Owner(models.Model):
@@ -61,20 +54,26 @@ class Shop(models.Model):
         return 'Bild gelöscht.'
 
     def articleAdd(self, articletitle, articleprice):
-        article1 = Article(shop=self.id, titel=articeltitle, price=articelprice)
+        article1 = Article(shop=self.id, titel=articletitle, price=articleprice)
 
 
     def articelDelete(self, articletitle):
-        article = Article.objects.filter(shop=self.id)
+        article = Article.objects.filter(Article.shop == self.id)
         if article is None:
             return
-        del article
+        article[:].delete()
 
 
 class Delievery(models.Model):
     shop = models.ForeignKey(Shop, on_delete=models.DO_NOTHING)
     shipping_costs = models.DecimalField(max_digits=3, decimal_places=2)
     sum_of_prices = models.DecimalField(max_digits=7, decimal_places=2)
+
+    def calculate(self):
+        articles = Article.objects.filter(Article.delivery.id == self.id)
+        sum_of_prices = articles[:].price
+        sum_of_prices = sum_of_prices + self.shipping_costs
+
 
 
 class Article(models.Model):
@@ -86,7 +85,7 @@ class Article(models.Model):
     price = models.DecimalField(max_digits=6, decimal_places=2)
     units = models.PositiveSmallIntegerField()
 
-    def addPhoto(self, filename):
+    def addPic(self, filename):
         filename = str(self.id) + str(self.name)
         Article.pics.append(models.ImageField(upload_to=get_image_path(self, filename), name=filename))
         return 'Bild hochgeladen.'
