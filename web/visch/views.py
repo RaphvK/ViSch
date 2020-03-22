@@ -8,7 +8,6 @@ from django.urls import reverse
 from .forms import AddressForm
 from .models import Shop, Adresse
 
-
 def index(request):
     address_form = AddressForm()
     # if this is a POST request we need to process the form data
@@ -62,6 +61,7 @@ def map_view(request):
 
 def register_view(request):
     register_form = UserCreationForm()
+    shop_form = ShopForm()
     if request.method == "POST":
         register_form = UserCreationForm(request.POST)
         if register_form.is_valid():
@@ -69,8 +69,11 @@ def register_view(request):
             username = register_form.cleaned_data['username']
             password = register_form.cleaned_data['password1']
             user = authenticate(request, username=username, password=password)
+           # newShop = Shop()
             if user:
                 login(request, user)
+                return render(request, 'visch/create_shop.html', {'create_shop_form': shop_form},
+                              {'address_form': AddressForm})
     return render(request, 'visch/register.html', {'register_form': register_form})
 
 def login_view(request):
@@ -90,4 +93,11 @@ def logout_view(request):
     return redirect(reverse('visch:index'))
 
 def betreiber_view(request):
+    shop_form = ShopForm()
+    if request.method == "POST":
+        shop_form = ShopForm(request.POST)
+        if shop_form.is_valid():
+            shop = shop_form.save()
+            return render(request, 'visch/betreiber.html', {'shopname': shop.name})
+
     return render(request, 'visch/betreiber.html')

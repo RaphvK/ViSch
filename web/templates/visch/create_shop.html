@@ -1,0 +1,11 @@
+{% extends "visch/base.html" %}
+
+{% block content %}
+    <h1 class="my-4">Welcome to Modern Business</h1>
+
+    <form method="post" action="{% url 'visch:betreiber' %}">
+      {% csrf_token %}
+      {{ create_shop_form.as_p }}
+      <button type="submit">Shop anlegen</button>
+    </form>
+{% endblock %}

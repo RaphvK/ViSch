@@ -9,17 +9,16 @@ def get_image_path(instance, filename):
    return os.path.join('photos', str(instance.id), filename)
 
 
-class Adresse(models.Model):
+class Address(models.Model):
     strasse = models.CharField(max_length=40)
     ort = models.CharField(max_length=50)
     plz = models.CharField(max_length=5)
-    latitude = models.FloatField(null=True)
-    longitude = models.FloatField(null=True)
+    latitude = models.FloatField(null=True,blank=True)
+    longitude = models.FloatField(null=True,blank=True)
 
     def get_lonlat_from_address(self):
         geolocator = Nominatim(user_agent="visch")
         location = geolocator.geocode(self.strasse + ", " + self.plz + " " + self.ort)
-        print((location.latitude, location.longitude))
         self.latitude = location.latitude
         self.longitude = location.longitude
 
@@ -32,13 +31,13 @@ class Owner(models.Model):
 
 
 class Shop(models.Model):
-    #shopType = models.TextChoices('shopType',
-    #                              'Restaurant Bekleidungsgeschäft Gärtnerei Uhrenmacher Juwelier Buchladen Handwerk Parfümerie Optiker Entertainment')
+    shopType = models.TextChoices('shopType',
+                                  'Restaurant Bekleidungsgeschäft Gärtnerei Uhrenmacher Juwelier Buchladen Handwerk Parfümerie Optiker Entertainment Sonstige')
     name = models.CharField(max_length=40)
-    adresse = models.ForeignKey(Adresse, on_delete=models.CASCADE)
-    #categorie = models.CharField(max_length=70, choices=shopType.choices)
-    shortInfo = models.CharField(max_length=200)
-    #pics = [models.ImageField(upload_to=get_image_path, blank=True, null=True)]
+    address = models.ForeignKey(Address, on_delete=models.CASCADE, null=True,blank=True)
+    categorie = models.CharField(max_length=70, choices=shopType.choices, default='Sonstige')
+    shortInfo = models.CharField(max_length=200, blank=True)
+    pics = [models.ImageField(upload_to=get_image_path, blank=True, null=True)]
     delieverys = models.BooleanField(default=False)
     owner = models.ForeignKey(Owner, on_delete=models.CASCADE, blank=True, null=True)
     chatEnable = models.BooleanField(default=False)
