@@ -1,6 +1,8 @@
 from django.contrib.auth.models import User
 from django.db import models
 import os
+from geopy.geocoders import Nominatim
+import math
 
 
 def get_image_path(instance, filename):
@@ -15,7 +17,6 @@ class Adresse(models.Model):
     longitude = models.FloatField(null=True)
 
     def get_lonlat_from_address(self):
-        from geopy.geocoders import Nominatim
         geolocator = Nominatim(user_agent="visch")
         location = geolocator.geocode(self.strasse + ", " + self.plz + " " + self.ort)
         print((location.latitude, location.longitude))
@@ -31,13 +32,13 @@ class Owner(models.Model):
 
 
 class Shop(models.Model):
-    shopType = models.TextChoices('shopType',
-                                  'Restaurant Bekleidungsgeschäft Gärtnerei Uhrenmacher Juwelier Buchladen Handwerk Parfümerie Optiker Entertainment')
+    #shopType = models.TextChoices('shopType',
+    #                              'Restaurant Bekleidungsgeschäft Gärtnerei Uhrenmacher Juwelier Buchladen Handwerk Parfümerie Optiker Entertainment')
     name = models.CharField(max_length=40)
     adresse = models.ForeignKey(Adresse, on_delete=models.CASCADE)
-    categorie = models.CharField(max_length=70, choices=shopType.choices)
+    #categorie = models.CharField(max_length=70, choices=shopType.choices)
     shortInfo = models.CharField(max_length=200)
-    pics = [models.ImageField(upload_to=get_image_path, blank=True, null=True)]
+    #pics = [models.ImageField(upload_to=get_image_path, blank=True, null=True)]
     delieverys = models.BooleanField(default=False)
     owner = models.ForeignKey(Owner, on_delete=models.CASCADE, blank=True, null=True)
     chatEnable = models.BooleanField(default=False)

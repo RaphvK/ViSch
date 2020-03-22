@@ -6,6 +6,7 @@ from django.http import HttpResponse
 # Create your views here.
 from django.urls import reverse
 from .forms import AddressForm
+from .models import Shop, Adresse
 
 
 def index(request):
@@ -31,12 +32,24 @@ def map_view(request):
             map_center['lat'] = new_address.latitude
             address_string = new_address.strasse + ", " + new_address.plz + " " + new_address.ort
 
-    mapbox_access_token = 'pk.eyJ1IjoicmFmZml2ayIsImEiOiJjazgyeGdiajIxMmFuM2xydWRxMjc1OWo1In0.ScA_dn1wK1jJ2WEC7xIegA'
-    return render(request, 'visch/map.html',
-                  {'mapbox_access_token': mapbox_access_token,
-                   'lon': map_center['lon'],
-                   'lat': map_center['lat'],
-                   'address_string': address_string})
+            Shop.objects.all().delete()
+            test_address = Adresse(strasse="Wupperstr. 5", plz="40219", ort="Düsseldorf")
+            test_address.get_lonlat_from_address()
+            test_address.save()
+            Shop.objects.create(name="Laden", shortInfo="Super Restaurant!", adresse=test_address)
+
+            shops = Shop.objects.all()
+
+            mapbox_access_token = 'pk.eyJ1IjoicmFmZml2ayIsImEiOiJjazgyeGdiajIxMmFuM2xydWRxMjc1OWo1In0.ScA_dn1wK1jJ2WEC7xIegA'
+
+
+            return render(request, 'visch/map.html',
+                          {'mapbox_access_token': mapbox_access_token,
+                           'lon': map_center['lon'],
+                           'lat': map_center['lat'],
+                           'address_string': address_string,
+                           'shops': shops})
+        return render(request, 'visch/index.html')
 
 
 def register_view(request):

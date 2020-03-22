@@ -36,8 +36,28 @@
         geometry: {
           type: 'Point',
           coordinates: [{{ lon }}, {{ lat }}]
-        }
-      }
+        },
+          properties: {
+              'marker-color': '#3bb2d0',
+              'marker-size': 'large',
+              'marker-symbol': 'u'
+          }
+      },
+
+    {% for shop in shops %}
+      {
+        type: 'Feature',
+        geometry: {
+          type: 'Point',
+          coordinates: [{{ shop.adresse.longitude }}, {{ shop.adresse.latitude }}]
+        },
+          properties: {
+              'marker-color': '#3bb2d0',
+              'marker-size': 'medium',
+              'marker-symbol': '{{ shop.id }}'
+          }
+      },
+    {% endfor %}
     ];
 
     var myLayer = L.mapbox.featureLayer().setGeoJSON(geojson).addTo(map);
