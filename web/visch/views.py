@@ -5,10 +5,31 @@ from django.http import HttpResponse
 
 # Create your views here.
 from django.urls import reverse
+from visch.forms import AddressForm
 
 
 def index(request):
-    return render(request, 'visch/index.html')
+    address_form = AddressForm()
+    # if this is a POST request we need to process the form data
+
+    return render(request, 'visch/index.html',
+                  {'address_form': address_form})
+
+
+def map_view(request):
+    map_center = 0
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = AddressForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            map_center = form.data['street'] + ", " + form.data['town']
+
+    mapbox_access_token = 'pk.eyJ1IjoicmFmZml2ayIsImEiOiJjazgyeGdiajIxMmFuM2xydWRxMjc1OWo1In0.ScA_dn1wK1jJ2WEC7xIegA'
+    return render(request, 'visch/map.html',
+                  {'mapbox_access_token': mapbox_access_token,
+                   'map_center': map_center})
+
 
 def register_view(request):
     register_form = UserCreationForm()
