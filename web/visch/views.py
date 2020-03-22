@@ -36,7 +36,15 @@ def map_view(request):
             test_address = Adresse(strasse="Wupperstr. 5", plz="40219", ort="Düsseldorf")
             test_address.get_lonlat_from_address()
             test_address.save()
-            Shop.objects.create(name="Laden", shortInfo="Super Restaurant!", adresse=test_address)
+            Shop.objects.create(name="Restaurant Venezia", shortInfo="Super leckere Pizza!", adresse=test_address)
+            test_address = Adresse(strasse="Erftstr. 5", plz="40219", ort="Düsseldorf")
+            test_address.get_lonlat_from_address()
+            test_address.save()
+            Shop.objects.create(name="Boutique Paris", shortInfo="Die beste Auswahl an Kleidern der Stadt.", adresse=test_address)
+            test_address = Adresse(strasse="Erftstr. 20", plz="40219", ort="Düsseldorf")
+            test_address.get_lonlat_from_address()
+            test_address.save()
+            Shop.objects.create(name="Eiscafé San Remo", shortInfo="Alles handgemacht.", adresse=test_address)
 
             shops = Shop.objects.all()
 

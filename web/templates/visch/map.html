@@ -40,7 +40,7 @@
           properties: {
               'marker-color': '#3bb2d0',
               'marker-size': 'large',
-              'marker-symbol': 'u'
+              'marker-symbol': 'h'
           }
       },
 
@@ -67,7 +67,9 @@
 </div>
 <div style="padding-top: 30px; padding-bottom: 30px">
 <h2>Liste</h2>
-
+{% for shop in shops %}
+<p>{{ shop.id }}: {{ shop.name }} - {{ shop.shortInfo }}</p>
+{% endfor %}
 </div>
 
 {% endblock %}
