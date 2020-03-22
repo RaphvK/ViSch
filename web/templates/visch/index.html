@@ -1,33 +1,11 @@
 {% extends "visch/base.html" %}
 
 {% block head %}
-  <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.2.1/build/ol.js"></script>
-    <style>
-    .map {
-      height: 400px;
-      width: 100%;
-    }
-  </style>
 {% endblock %}
 
 
 {% block content %}
     <h1 class="my-4">Entdecke die schönsten Läden deiner Nachbarschaft</h1>
-    <div id="map" class="map"></div>
-    <script type="text/javascript">
-      var map = new ol.Map({
-        target: 'map',
-        layers: [
-          new ol.layer.Tile({
-            source: new ol.source.OSM()
-          })
-        ],
-        view: new ol.View({
-          center: ol.proj.fromLonLat([37.41, 8.82]),
-          zoom: 4
-        })
-      });
-    </script>
 
         <!-- Marketing Icons Section -->
     <div class="row">
@@ -38,7 +16,7 @@
             <p class="card-text">Erstelle jetzt ein virtuelles Schaufenster für deinen Laden und bleib mit deinen Kunden in Kontakt, auch wenn sie nicht persönlich vorbeikommen können.</p>
           </div>
           <div class="card-footer">
-            <a href="#" class="btn btn-primary">Jetzt registrieren</a>
+            <a href="{% url "visch:register" %}" class="btn btn-primary">Jetzt registrieren</a>
           </div>
         </div>
       </div>
@@ -47,9 +25,15 @@
           <h4 class="card-header">Bist du Kunde?</h4>
           <div class="card-body">
             <p class="card-text">Du möchtest auch in Zeiten von Covid-19 nicht auf deine Lieblingsläden in der Nachbarschaft verzichten? Bleib deinen lokalen Händlern treu und nutze ViSch und dich inspirieren und beraten zu lassen. Du kannst dir deine Waren im Geschäft zusammenstellen lassen und dort abholen oder sie dir vorbeibringen lassen.</p>
+
           </div>
           <div class="card-footer">
-            <a href="#" class="btn btn-primary">Jetzt entdecken</a>
+            <p class="card-text">Gibt deine Adresse ein:</p>
+            <form method="post" action="{% url 'visch:map' %}">
+              {% csrf_token %}
+              {{ address_form.as_p }}
+              <button type="submit">Jetzt entdecken</button>
+            </form>
           </div>
         </div>
       </div>
