@@ -6,12 +6,21 @@ import os
 def get_image_path(instance, filename):
    return os.path.join('photos', str(instance.id), filename)
 
+
 class Adresse(models.Model):
-    street = models.CharField(max_length=40)
-    town = models.CharField(max_length=40)
-    zipCode = models.PositiveIntegerField()
-    latitude = models.FloatField(blank=True)
-    longitude = models.FloatField(blank=True)
+    strasse = models.CharField(max_length=40)
+    ort = models.CharField(max_length=50)
+    plz = models.CharField(max_length=5)
+    latitude = models.FloatField(null=True)
+    longitude = models.FloatField(null=True)
+
+    def get_lonlat_from_address(self):
+        from geopy.geocoders import Nominatim
+        geolocator = Nominatim(user_agent="visch")
+        location = geolocator.geocode(self.strasse + ", " + self.plz + " " + self.ort)
+        print((location.latitude, location.longitude))
+        self.latitude = location.latitude
+        self.longitude = location.longitude
 
 
 class Owner(models.Model):

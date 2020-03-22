@@ -5,7 +5,7 @@ from django.http import HttpResponse
 
 # Create your views here.
 from django.urls import reverse
-from visch.forms import AddressForm
+from .forms import AddressForm
 
 
 def index(request):
@@ -17,18 +17,26 @@ def index(request):
 
 
 def map_view(request):
-    map_center = 0
+    map_center = {'lon': 0, 'lat': 0}
+    address_string = "Address not found!"
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
         form = AddressForm(request.POST)
+
         # check whether it's valid:
         if form.is_valid():
-            map_center = form.data['street'] + ", " + form.data['town']
+            new_address = form.save(commit=False)
+            new_address.get_lonlat_from_address()
+            map_center['lon'] = new_address.longitude
+            map_center['lat'] = new_address.latitude
+            address_string = new_address.strasse + ", " + new_address.plz + " " + new_address.ort
 
     mapbox_access_token = 'pk.eyJ1IjoicmFmZml2ayIsImEiOiJjazgyeGdiajIxMmFuM2xydWRxMjc1OWo1In0.ScA_dn1wK1jJ2WEC7xIegA'
     return render(request, 'visch/map.html',
                   {'mapbox_access_token': mapbox_access_token,
-                   'map_center': map_center})
+                   'lon': map_center['lon'],
+                   'lat': map_center['lat'],
+                   'address_string': address_string})
 
 
 def register_view(request):
